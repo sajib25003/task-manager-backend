@@ -10,7 +10,12 @@ const app = express();
 const jwt = require("jsonwebtoken");
 
 app.use(express.json());
-app.use(cors({origin: "http://localhost:5173"}));
+app.use(cors({
+  origin: ["http://localhost:5173", "https://task-manager-redux.surge.sh"], 
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true 
+}));
 
 // Connect to MongoDB
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ruowzmj.mongodb.net/`);
